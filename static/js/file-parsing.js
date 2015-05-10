@@ -1,5 +1,7 @@
 // namespace
 var sylParse = {};
+sylParse.fileContents = "";
+sylParse.contentReady=false;
 
 
 sylParse.parseHandler = function (fileObj) {
@@ -18,6 +20,9 @@ sylParse.parseHandler = function (fileObj) {
     case "txt":
         sylParse.readTxt(fileObj);
         break;
+    case "pdf":
+        sylParse.readPDF(fileObj);
+        break;
     // we can't support everything sorry
     default:
         alert("file format not supported");
@@ -25,7 +30,6 @@ sylParse.parseHandler = function (fileObj) {
 }
 
 sylParse.readTxt = function(file) {
-
     var reader = new FileReader();
     // when the file reader has loaded the file contents into memory
     // call readSuccess
@@ -33,7 +37,8 @@ sylParse.readTxt = function(file) {
     // takes the event data from onload
     // which is the text read in by the reader
     function readSuccess(evt) {
-        console.log(evt.target.result);
+        sylParse.fileContents = evt.target.result;
+        sylParse.contentReady=true;
     };
     // read the file as text, then calling readSuccess
     // when onload fires
@@ -50,9 +55,22 @@ sylParse.readDocx = function(file) {
         var doc = new Docxgen(evt.target.result);
         // grab just the text from our docx object
         text = doc.getFullText();
-        // log the text
-        console.log(text);
+        sylParse.fileContents = text;
+        sylParse.contentReady=true;
     };
     // take the file and build a blob
     reader.readAsBinaryString(file);
+}
+
+sylParse.readPDF = function(file) {
+    // create a new file reader object
+    var reader = new FileReader();
+    reader.onload = readSuccess;
+    function readSuccess(evt) {
+        pdfParser.toText(evt.target.result).then(function(result) {
+            sylParse.fileContents = result;
+            sylParse.contentReady=true;
+        });
+    }
+    reader.readAsDataURL(file);
 }

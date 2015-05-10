@@ -2,14 +2,18 @@
   <head>
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgIAAAAAEBAgICAAAAEBAQICAgAAEBAQICAgIAEBAQECAgICEBAQEAAgICEhAQEAAAICEhIQEAAAACEhISEAAAAAEhISEgAAAAEBISEgIAAAEBASEgICAAEBAQEgICAgEBAQEAICAgIBAQEAACAgIBAQEAAAAgICAQEAAAAAICCv9QAAV+oAAKvVAABVqgAAqlUAANQrAADoFwAA8A8AAPAPAADoFwAA1CsAAKpVAABVqgAAq9UAAFfqAACv9QAA" rel="icon" type="image/x-icon" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/static/js/pdf.js"> </script>
+    <script src="/static/js/pdf.worker.js"> </script>
     <script src="/static/js/docxgen.min.js"> </script>
     <script src="/static/js/gcal-boiler-plate.js"> </script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
     <script src="/static/js/gcal-integrator.js"> </script>
     <script src="/static/js/file-parsing.js"> </script>
+    <script src="/static/js/pdftotext.js"> </script>
   </head>
 
   <body>
+          <h1>School Sucks. Let us help.</h1>
           <div id="authorize-div" style="display: none">
           <span>Authorize access to calendar</span>
           <!--Button for the user to click to initiate auth sequence -->
@@ -18,8 +22,9 @@
           </button>
           </div>
 
-          <div id="events">
-          </div>
+          <div id="events"></div>
+          <div id="uploader"></div>
+          <button id="viewContents">view</button>
 
  </body>
 </html>

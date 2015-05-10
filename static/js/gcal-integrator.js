@@ -18,10 +18,14 @@ function createEventField() {
 
 $( document ).ready(function() {
 
-                        initFileHandling();
                         // set onclick listener
                         $('#add').click(submitEvent);
                         $('#slider').change(function() { $("duration").val($("#slider").val()); });
+                        initFileHandling();
+                        $("#viewContents").click( function() { if(sylParse.contentReady){
+                                                                            console.log(sylParse.fileContents);
+                                                                        }
+                                                                    });
                         }
                     );
 // init file handling
@@ -29,7 +33,7 @@ function initFileHandling() {
     var fileInput = $("<input></input>");
     fileInput.attr("type", "file");
     fileInput.attr("id", "buffer");
-    $("#events").append(fileInput);
+    $("#uploader").append(fileInput);
     $("#buffer").change( function() { sylParse.parseHandler( $('#buffer').get(0).files[0] ) });
 }
 

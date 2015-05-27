@@ -16,14 +16,19 @@ function createEventField() {
     $("#events").append(integrator.eventForm);
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+// need to separate this out into its own module APP
 $( document ).ready(function() {
 
                         // set onclick listener
                         $('#add').click(submitEvent);
                         $('#slider').change(function() { $("duration").val($("#slider").val()); });
                         initFileHandling();
-                        $("#viewContents").click( function() { if(sylParse.contentReady){
-                                                                            console.log(sylParse.fileContents);
+                        $("#viewContents").click( function() { if(sylParser.contentReady){
+                                                                            console.log(sylParser.fileContents);
+                                                                            txtParser.fullText(sylParser.fileContents);
+                                                                            console.log(txtParser.dates);
                                                                         }
                                                                     });
                         }
@@ -34,8 +39,10 @@ function initFileHandling() {
     fileInput.attr("type", "file");
     fileInput.attr("id", "buffer");
     $("#uploader").append(fileInput);
-    $("#buffer").change( function() { sylParse.parseHandler( $('#buffer').get(0).files[0] ) });
+    $("#buffer").change( function() { sylParser.parseHandler( $('#buffer').get(0).files[0] ) });
 }
+///////////////////////////////////////////////////////////////////////////////
+
 
 
 // should be submit event
